@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,18 @@ class Genus
      * @ORM\Column(type="string", nullable=true)
      */
     private $funFact;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="GenusNote", mappedBy="genus")
+     * @ORM\OrderBy({"createdAt"="DESC"})
+     */
+    private $notes;
+
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+    }
 
     /**
      * @ORM\Column(type="boolean")
@@ -74,7 +87,7 @@ class Genus
 
     public function getFunFact()
     {
-        return $this->funFact;
+        return '**TEST** '.$this->funFact;
     }
 
     public function setFunFact($funFact)
@@ -91,4 +104,14 @@ class Genus
     {
         $this->isPublished = $isPublished;
     }
+
+    /**
+     * @return ArrayCollection\GenusNote[]
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+
 }

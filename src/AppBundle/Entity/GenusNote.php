@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GenusNoteRepository")
  * @ORM\Table(name="genus_note")
  */
 class GenusNote
@@ -45,7 +46,8 @@ class GenusNote
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Genus")
+     * @ORM\ManyToOne(targetEntity="Genus", inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $genus;
 
@@ -128,6 +130,16 @@ class GenusNote
     {
         $this->createdAt = $createdAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
 
 
 
