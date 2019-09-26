@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Genus;
+use AppBundle\Entity\GenusNote;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,8 +23,16 @@ class GenusController extends Controller
         $genus->setSpeciesCount(rand(100, 99999));
         $genus->setIsPublished(true);
 
+        $genusNote = new GenusNote();
+        $genusNote->setUsername('Aquaweaver');
+        $genusNote->setUserAvatarFilename('ryan.jpeg');
+        $genusNote->setNote('Blah blah blah');
+        $genusNote->setCreatedAt(new \DateTime('-1 month'));
+        $genusNote->setGenus($genus);
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($genus);
+        $em->persist($genusNote);
         $em->flush();
 
         return new Response('<html><body>Genus created!</body></html>');
@@ -37,7 +46,7 @@ class GenusController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $genuses = $em->getRepository('AppBundle:Genus')
-            ->findAll();
+            ->findAllPublishedOrderedBySize();
 
         return $this->render('genus/list.html.twig', [
             'genuses' => $genuses
