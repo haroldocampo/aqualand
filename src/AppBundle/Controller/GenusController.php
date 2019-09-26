@@ -20,6 +20,7 @@ class GenusController extends Controller
         $genus->setName('Octopus'.rand(1, 100));
         $genus->setSubFamily('Octopodinae');
         $genus->setSpeciesCount(rand(100, 99999));
+        $genus->setIsPublished(true);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($genus);
@@ -36,7 +37,7 @@ class GenusController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $genuses = $em->getRepository('AppBundle:Genus')
-            ->findAllPublishedOrderedBySize();
+            ->findAll();
 
         return $this->render('genus/list.html.twig', [
             'genuses' => $genuses

@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GenusRepository")
  * @ORM\Table(name="genus")
  */
 class Genus
@@ -33,90 +33,62 @@ class Genus
     private $speciesCount;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $funFact;
 
     /**
-     * @return mixed
+     * @ORM\Column(type="boolean")
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $isPublished;
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param mixed $name
-     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSubFamily()
     {
         return $this->subFamily;
     }
 
-    /**
-     * @param mixed $subFamily
-     */
     public function setSubFamily($subFamily)
     {
         $this->subFamily = $subFamily;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSpeciesCount()
     {
         return $this->speciesCount;
     }
 
-    /**
-     * @param mixed $speciesCount
-     */
     public function setSpeciesCount($speciesCount)
     {
         $this->speciesCount = $speciesCount;
     }
 
-    /**
-     * @return mixed
-     */
     public function getFunFact()
     {
         return $this->funFact;
     }
 
-    /**
-     * @param mixed $funFact
-     */
     public function setFunFact($funFact)
     {
         $this->funFact = $funFact;
     }
 
+    public function getUpdatedAt()
+    {
+        return new \DateTime('-'.rand(0, 100).' days');
+    }
 
-
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+    }
 }
