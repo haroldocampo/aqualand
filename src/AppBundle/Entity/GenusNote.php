@@ -1,17 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 9/26/19
- * Time: 6:27 PM
- */
 
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
  * @ORM\Entity(repositoryClass="AppBundle\Repository\GenusNoteRepository")
  * @ORM\Table(name="genus_note")
  */
@@ -44,103 +37,64 @@ class GenusNote
      */
     private $createdAt;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Genus", inversedBy="notes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $genus;
 
-    /**
-     * @return mixed
-     */
-    public function getGenus()
-    {
-        return $this->genus;
-    }
-
-    /**
-     * @param mixed $genus
-     */
-    public function setGenus(Genus $genus)
-    {
-        $this->genus = $genus;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUserAvatarFilename()
-    {
-        return $this->userAvatarFilename;
-    }
-
-    /**
-     * @param mixed $userAvatarFilename
-     */
-    public function setUserAvatarFilename($userAvatarFilename)
-    {
-        $this->userAvatarFilename = $userAvatarFilename;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNote()
-    {
-        return $this->note;
-    }
-
-    /**
-     * @param mixed $note
-     */
-    public function setNote($note)
-    {
-        $this->note = $note;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param mixed $createdAt
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
+    public function getUsername()
+    {
+        return $this->username;
+    }
 
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
 
+    public function getUserAvatarFilename()
+    {
+        return $this->userAvatarFilename;
+    }
 
+    public function setUserAvatarFilename($userAvatarFilename)
+    {
+        $this->userAvatarFilename = $userAvatarFilename;
+    }
 
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    public function setNote($note)
+    {
+        $this->note = $note;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getGenus()
+    {
+        return $this->genus;
+    }
+
+    public function setGenus(Genus $genus)
+    {
+        $this->genus = $genus;
+    }
 }
